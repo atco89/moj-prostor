@@ -27,7 +27,7 @@ jobs:
           TARGET: ${{ env.WORKDIR }}
           EXCLUDE: "/vendor, /.env"
           SCRIPT_AFTER: |
-            cp -f ./.env.prod ./.env
+            cp .env.prod .env
             composer install --no-interaction --prefer-dist --optimize-autoloader
             php artisan key:generate
             php artisan migrate --force
