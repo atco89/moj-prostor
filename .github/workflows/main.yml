@@ -1,0 +1,43 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  WORKDIR: /var/www/html
+
+jobs:
+  deploy:
+    name: Deployment on production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout files.
+        uses: actions/checkout@v3
+
+      - name: Deploy files.
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          ARGS: "-rlgoDzvc -i --delete"
+          TARGET: ${{ env.WORKDIR }}
+          EXCLUDE: "
+            /vendor,
+            /.env
+          "
+          SCRIPT_AFTER: |
+            cp -f ./.env.prod ./.env && \
+            composer install \
+              --no-interaction \
+              --prefer-dist \
+              --optimize-autoloader && \
+            php artisan key:generate && \
+            php artisan migrate \
+              --force && \
+            php artisan optimize:clear && \
+            php artisan optimize && \
+            php artisan view:clear
