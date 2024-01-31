@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  WORKDIR: /var/www/html
+  WORKDIR: /www/webvol38/ls/8elvobj6qvcqc4s/moj-prostor.rs
 
 jobs:
   deploy:
@@ -26,7 +26,7 @@ jobs:
           ARGS: "-rlgoDzvc -i --delete"
           TARGET: ${{ env.WORKDIR }}
           EXCLUDE: "
-            /vendor,
+            /vendor, 
             /.env
           "
           SCRIPT_AFTER: |
