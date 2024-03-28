@@ -1,0 +1,51 @@
+# Laravel specific
+/bootstrap/cache/*
+/public/storage
+/storage/*.key
+/storage/debugbar/*
+/storage/framework/*
+/storage/logs/*
+/vendor/
+
+# Laravel environment files
+.env
+.env.backup
+.env.*.backup
+.env.local
+.env.*.local
+.env.testing
+
+# PHPunit specific files
+.phpunit.result.cache
+/.phpunit.cache
+
+# Node modules and build artifacts
+/node_modules/
+/public/build/
+/public/mix-manifest.json
+/public/hot
+/vcs
+
+# Composer files
+/composer.lock
+/auth.json
+
+# IDEs and editors
+/.idea/
+/.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# OS and Editor folders
+.DS_Store
+Thumbs.db
+
+# Config files
+/config/*.php
+
+# Others
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
